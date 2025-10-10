@@ -6,12 +6,86 @@
     <title>Jogo da Velha</title>
 
     <style>
-        table {width: 550px;height: 350px; border: 2px solid black;}
+        table {
+            width: 360px;
+            height: 360px;
+            border-collapse: collapse;
+            margin: 20px auto;
+            border: 4px solid #222;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
         table tr{background-color: red; font: bold 46px Verdana; color: antiquewhite;}
-        table tr td{text-align: center; width: 33.33%;}
-        table tr td:hover{cursor: pointer;}
-        input[type=button]{width: 150px; height: 50px; font-size:20px; font-weight:bold; margin-top:20px;}
-        fieldset{font-size:20; font-weight:bold; border:2px solid blue; width:300px; margin-bottom: 25px;padding: 10px;}
+        table tr td {
+            text-align: center;
+            font: bold 48px Verdana;
+            color: #fff;
+            background-color: #e63946;
+            width: 33.33%;
+            height: 120px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        table tr td:hover {
+            background-color: #457b9d;
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+        input[type=text] {
+            width: 94%;
+            height: 35px;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        input[type=button] {
+            width: 100%;
+            height: 45px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #1d3557;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        input[type=button]:hover {
+            background-color: #457b9d;
+            cursor: pointer;
+        }
+        fieldset {
+            border: 2px solid #1d3557;
+            border-radius: 10px;
+            width: 360px;
+            margin: 0 auto 20px auto;
+            padding: 15px;
+            background-color: #f1faee;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        legend {
+            font-weight: bold;
+            font-size: 20px;
+            color: #1d3557;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #1d3557;
+        }
+        h3#jogadorAtual {
+            text-align: center;
+            font-size: 22px;
+            color: #1d3557;
+            margin-top: 10px;
+        }
+        h1 {
+            text-align: center;
+            font-family: 'Verdana';
+            color: #1d3557;
+        }
     </style>
     <script>
         //esconde o tabuleiro
@@ -30,19 +104,24 @@
         var formas = ['X', 'O'];
         var tabuleiro = new Array(9);
         
-
-
         initGame = function(){
-            var nomeJogador1 = document.getElementById(jogador1).value;
-            var nomeJogador2 = document.getElementById(jogador2).value;
+            var nomeJogador1 = document.getElementById('jogador1').value;
+            var nomeJogador2 = document.getElementById('jogador2').value;
 
-            // 0 = "X"; 1 = "O"
-            jogador1 = new Jogador(nomeJogador1, 0);
-            jogador2 = new Jogador(nomeJogador2, 1);
-            jogadorAtual = jogador1;
-            setLabelJogadorAtual();
-            document.getElementById('game').style.visibility='visible';
+            if (nomeJogador1.trim() === '' || nomeJogador2.trim() === '') {
+                alert('Por favor, insira o nome dos dois jogadores!');
+            return;
         }
+
+        jogador1 = new Jogador(nomeJogador1, 0); // X
+        jogador2 = new Jogador(nomeJogador2, 1); // O
+        jogadorAtual = jogador1;
+
+        setLabelJogadorAtual();
+        document.getElementById('game').style.visibility = 'visible';
+        }
+
+
         reset = function (){window.location.reload();}
         setLabelJogadorAtual = function (){
             document.getElementById('jogadorAtual').innerHTML = "Jogador atual: " + jogadorAtual.nome;
@@ -59,12 +138,16 @@
         allElementsInSomeLine = function() {
             for(var i=0; i <7; i+=3){
                 if(tabuleiro[i] == 'X' && tabuleiro[i+1] == 'X' && tabuleiro[i+2] == 'X'){
-                    alert(jogador1.nome + ' Vencedor!!!');
-                    reset();
+                    setTimeout(function() {
+                        alert(jogador1.nome + ' Vencedor!!!');
+                        reset();
+                    }, 300);
                 }
                 if(tabuleiro[i] == 'O' && tabuleiro[i+1] == 'O' && tabuleiro[i+2] == 'O'){
-                    alert(jogador2.nome + ' Vencedor!!!');
-                    reset();
+                    setTimeout(function() {
+                        alert(jogador1.nome + ' Vencedor!!!');
+                        reset();
+                    }, 300);
                 }
             }
         }
@@ -72,26 +155,34 @@
         allElementsInSomeColumn = function(){
             for(var i=0; i <3; i++){
                 if(tabuleiro[i] == 'X' && tabuleiro[i+3] == 'X' && tabuleiro[i+6] == 'X'){
-                    alert(jogador1.nome + ' Vencedor!!!');
-                    reset();
+                    setTimeout(function() {
+                        alert(jogador1.nome + ' Vencedor!!!');
+                        reset();
+                    }, 300);
                 }
                 if(tabuleiro[i] == 'O' && tabuleiro[i+3] == 'O' && tabuleiro[i+6] == 'O'){
-                    alert(jogador2.nome + ' Vencedor!!!');
-                    reset();
+                    setTimeout(function() {
+                        alert(jogador1.nome + ' Vencedor!!!');
+                        reset();
+                    }, 300);
                 }
             }
         }
         //Verifica vitórias na diagonal
         allElementsInSomeDiagonal = function(){
-            if((tabuleiro[0] == 'X' && tabuleiro[4] == 'X' && tabuleiro[5] == 'X') || 
+            if((tabuleiro[0] == 'X' && tabuleiro[4] == 'X' && tabuleiro[8] == 'X') ||
             (tabuleiro[2] == 'X' && tabuleiro[4] == 'X' && tabuleiro[6] == 'X')){
-                alert(jogador1.nome + ' Vencedor!!!');
-                    reset();
+                setTimeout(function() {
+                        alert(jogador1.nome + ' Vencedor!!!');
+                        reset();
+                    }, 300);
             }
-            else if((tabuleiro[0] == 'O' && tabuleiro[4] == 'O' && tabuleiro[5] == 'O') || 
+            else if((tabuleiro[0] == 'O' && tabuleiro[4] == 'O' && tabuleiro[8] == 'O') ||
             (tabuleiro[2] == 'O' && tabuleiro[4] == 'O' && tabuleiro[6] == 'O')){
-                alert(jogador2.nome + ' Vencedor!!!');
-                    reset();
+                setTimeout(function() {
+                        alert(jogador1.nome + ' Vencedor!!!');
+                        reset();
+                    }, 300);
             }
         }
         //Função de verificar o clique
@@ -115,12 +206,11 @@
                 reset();
             }
         }
-
-        
-
-    </script>   
+    </script>
 </head>
+
 <body>
+    <h1>🎮 Jogo da Velha</h1>
     <fieldset>       
         <legend> Jogadores </legend>
         <label for = "Jogador 1"> Jogador 1: </label>
