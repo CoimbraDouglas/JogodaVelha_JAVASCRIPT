@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+
+    <style>
+        table {width: 550px;height: 350px; border: 2px solid black;}
+        table tr{background-color: red; font: bold 46px Verdana; color: antiquewhite;}
+        table tr td{text-align: center; width: 33.33%;}
+        table tr td:hover{cursor: pointer;}
+        input[type=button]{width: 150px; height: 50px; font-size:20px; font-weight:bold; margin-top:20px;}
+        fieldset{font-size:20; font-weight:bold; border:2px solid blue; width:300px; margin-bottom: 25px;padding: 10px;}
+    </style>
+    <script>
+        //esconde o tabuleiro
+        window.onload = function () {
+            document.getElementById('game').style.visibility = 'hidden'
+        };
+
+        function Jogador(nome, forma){
+            this.nome = nome;
+            this.forma = forma;
+        }
+
+        var jogador1, jogador2;
+
+        var jogadorAtual;
+        var formas = ['X', 'O'];
+        var tabuleiro = new Array(9);
+        
+
+
+        initGame = function(){
+            var nomeJogador1 = document.getElementById(jogador1).value;
+            var nomeJogador2 = document.getElementById(jogador2).value;
+
+            // 0 = "X"; 1 = "O"
+            jogador1 = new Jogador(nomeJogador1, 0);
+            jogador2 = new Jogador(nomeJogador2, 1);
+            jogadorAtual = jogador1;
+            setLabelJogadorAtual();
+            document.getElementById('game').style.visibility='visible';
+        }
+        reset = function (){window.location.reload();}
+        setLabelJogadorAtual = function (){
+            document.getElementById('jogadorAtual').innerHTML = "Jogador atual: " + jogadorAtual.nome;
+        }
+
+        tabuleiroIsFilled = function() {
+            var preenchidos = 0;
+            for(var i=0; i< tabuleiro.length;i++)
+                if(tabuleiro[i] != undefined)
+                    preenchidos++;
+            return preenchidos == tabuleiro.length;
+        }
+        //Verifica vitórias em linhas
+        allElementsInSomeLine = function() {
+            for(var i=0; i <7; i+=3){
+                if(tabuleiro[i] == 'X' && tabuleiro[i+1] == 'X' && tabuleiro[i+2] == 'X'){
+                    alert(jogador1.nome + ' Vencedor!!!');
+                    reset();
+                }
+                if(tabuleiro[i] == 'O' && tabuleiro[i+1] == 'O' && tabuleiro[i+2] == 'O'){
+                    alert(jogador2.nome + ' Vencedor!!!');
+                    reset();
+                }
+            }
+        }
+        //Verifica vitórias em colunas
+        allElementsInSomeColumn = function(){
+            for(var i=0; i <3; i++){
+                if(tabuleiro[i] == 'X' && tabuleiro[i+3] == 'X' && tabuleiro[i+6] == 'X'){
+                    alert(jogador1.nome + ' Vencedor!!!');
+                    reset();
+                }
+                if(tabuleiro[i] == 'O' && tabuleiro[i+3] == 'O' && tabuleiro[i+6] == 'O'){
+                    alert(jogador2.nome + ' Vencedor!!!');
+                    reset();
+                }
+            }
+        }
+        //Verifica vitórias na diagonal
+        allElementsInSomeDiagonal = function(){
+            if((tabuleiro[0] == 'X' && tabuleiro[4] == 'X' && tabuleiro[5] == 'X') || 
+            (tabuleiro[2] == 'X' && tabuleiro[4] == 'X' && tabuleiro[6] == 'X')){
+                alert(jogador1.nome + ' Vencedor!!!');
+                    reset();
+            }
+            else if((tabuleiro[0] == 'O' && tabuleiro[4] == 'O' && tabuleiro[5] == 'O') || 
+            (tabuleiro[2] == 'O' && tabuleiro[4] == 'O' && tabuleiro[6] == 'O')){
+                alert(jogador2.nome + ' Vencedor!!!');
+                    reset();
+            }
+        }
+        //Função de verificar o clique
+        setOnCeil = function(cel, pos){
+            if(tabuleiro[pos] == undefined){
+                cel.innerHTML = formas[jogadorAtual.forma];
+                tabuleiro[pos] = formas[jogadorAtual.forma];
+
+                (jogadorAtual.forma == 0 ) ? jogadorAtual = jogador2:jogadorAtual = jogador1;
+                setLabelJogadorAtual();
+
+            }else{
+                alert('Ops. Campo já foi marcado.');
+            }
+            allElementsInSomeLine();
+            allElementsInSomeColumn();
+            allElementsInSomeDiagonal();
+
+            if(tabuleiroIsFilled()){
+                alert('Ninguem Ganhou! Tente novamente.');
+                reset();
+            }
+        }
+
+        
+
+    </script>   
+</head>
+<body>
+    <fieldset>       
+        <legend> Jogadores </legend>
+        <label for = "Jogador 1"> Jogador 1: </label>
+        <input type= "text" id = "jogador1" /> 
+        <label for = "Jogador 2"> Jogador 2: </label>
+        <input type= "text" id = "jogador2" />
+        <input type="button" value="Iniciar" style="margin-top:4px; 
+        height:25px; width:150px; font-size:14px;" onclick="javascript: initGame()"/>
+
+    </fieldset>
+    <h3 id="jogadorAtual"></h3>
+    <div id="game">
+        <table cellpadding="0" cellspacing="1">
+            <tr border = "1">
+                <td onclick="javascript: setOnCeil(this, 0)" onmouseover="javascript: this.style.backgroundColor='blue'" onmouseout="javascript:this.style.backgroundColor='red'">&nbsp;</td>
+                <td onclick="javascript: setOnCeil(this, 1)"onmouseover="javascript: this.style.backgroundColor='blue'" onmouseout="javascript:this.style.backgroundColor='red'">&nbsp;</td>
+                <td onclick="javascript: setOnCeil(this, 2)"onmouseover="javascript: this.style.backgroundColor='blue'" onmouseout="javascript:this.style.backgroundColor='red'">&nbsp;</td>
+            </tr>
+            <tr border = "1">
+                <td onclick="javascript: setOnCeil(this, 3)" onmouseover="javascript: this.style.backgroundColor='blue'" onmouseout="javascript:this.style.backgroundColor='red'">&nbsp;</td>
+                <td onclick="javascript: setOnCeil(this, 4)" onmouseover="javascript: this.style.backgroundColor='blue'" onmouseout="javascript:this.style.backgroundColor='red'">&nbsp;</td>
+                <td onclick="javascript: setOnCeil(this, 5)" onmouseover="javascript: this.style.backgroundColor='blue'" onmouseout="javascript:this.style.backgroundColor='red'">&nbsp;</td>
+            </tr>
+            <tr border = "1">
+                <td onclick="javascript: setOnCeil(this, 6)" onmouseover="javascript: this.style.backgroundColor='blue'" onmouseout="javascript:this.style.backgroundColor='red'">&nbsp;</td>
+                <td onclick="javascript: setOnCeil(this, 7)" onmouseover="javascript: this.style.backgroundColor='blue'" onmouseout="javascript:this.style.backgroundColor='red'">&nbsp;</td>
+                <td onclick="javascript: setOnCeil(this, 8)" onmouseover="javascript: this.style.backgroundColor='blue'" onmouseout="javascript:this.style.backgroundColor='red'">&nbsp;</td>
+            </tr>
+        </table>
+    </div>   
+</body>
+
+</html>
