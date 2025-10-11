@@ -43,13 +43,13 @@ O jogo permite que dois jogadores insiram seus nomes, alternando as jogadas no t
 ## 🖼️ Interface  
 
 
-<h3>Tela de Cadastro dos dois jogadores. </h3>
+1.Tela de Cadastro dos dois jogadores.
 ![interface](images/Cap001.png)
 
-<h3>Tela de Exibição do tabuleiro</h3>
+2.Tela de Exibição do tabuleiro
 ![execucao](images/Cap002.png)
 
-<h3>Tela de Jogo finalizado</h3>
+3.Tela de Jogo finalizado
 ![final](images/Cap003.png)
 
 
