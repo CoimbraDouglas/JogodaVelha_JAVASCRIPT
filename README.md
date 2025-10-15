@@ -4,20 +4,21 @@ Projeto desenvolvido durante o **minicurso “TI - Criando um jogo com JavaScrip
 
 ---
 
-## 🧩 Descrição do Projeto  
+# 🧩 Descrição do Projeto  
 
 O **Jogo da Velha** foi desenvolvido utilizando **HTML, CSS e JavaScript** em um **único arquivo**, com o objetivo de aplicar conceitos fundamentais de **lógica de programação**, **manipulação do DOM** e **interatividade com o usuário**.  
 
 O jogo permite que dois jogadores insiram seus nomes, alternando as jogadas no tabuleiro de 3x3, com detecção automática de **vitórias em linhas, colunas e diagonais**, além da verificação de **empate**.  
+
 ---
 
-## 🕹️ Quer jogar?
+# 🕹️ Quer jogar?
 
 Clique no link a seguir e acesse: https://coimbradouglas.github.io/JogodaVelha_JAVASCRIPT/
 
 ---
 
-## 🚀 Tecnologias Utilizadas  
+# 🚀 Tecnologias Utilizadas  
 
 - **HTML5** → estruturação da interface do jogo.  
 - **CSS3** → estilização do tabuleiro e campos de entrada.  
@@ -25,7 +26,7 @@ Clique no link a seguir e acesse: https://coimbradouglas.github.io/JogodaVelha_J
 
 ---
 
-## 📚 Funcionalidades  
+# 📚 Funcionalidades  
 
 ✅ Cadastro dos dois jogadores.  
 ✅ Alternância automática entre jogador X e O.  
@@ -36,7 +37,7 @@ Clique no link a seguir e acesse: https://coimbradouglas.github.io/JogodaVelha_J
 
 ---
 
-## 🧠 Conceitos Aplicados  
+# 🧠 Conceitos Aplicados  
 
 - Estruturas condicionais e funções JavaScript.  
 - Manipulação dinâmica de elementos HTML via DOM.  
@@ -45,7 +46,7 @@ Clique no link a seguir e acesse: https://coimbradouglas.github.io/JogodaVelha_J
 
 ---
 
-## 🖼️ Interface  
+# 🖼️ Interface  
 
 
 1.Tela de Cadastro dos dois jogadores.
