@@ -6,7 +6,7 @@ Projeto desenvolvido durante o **minicurso “TI - Criando um jogo com JavaScrip
 
 # 🧩 Descrição do Projeto  
 
-O **Jogo da Velha** foi desenvolvido utilizando **HTML, CSS e JavaScript** em um **único arquivo**, com o objetivo de aplicar conceitos fundamentais de **lógica de programação**, **manipulação do DOM** e **interatividade com o usuário**.  
+O **Jogo da Velha** foi desenvolvido utilizando `HTML`, `CSS` e `JavaScript` em um **único arquivo**, com o objetivo de aplicar conceitos fundamentais de **lógica de programação**, **manipulação do DOM** e **interatividade com o usuário**.  
 
 O jogo permite que dois jogadores insiram seus nomes, alternando as jogadas no tabuleiro de 3x3, com detecção automática de **vitórias em linhas, colunas e diagonais**, além da verificação de **empate**.  
 
